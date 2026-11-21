@@ -94,9 +94,9 @@ extension String {
         bytes.reserveCapacity(count / 2)
         var iterator = self.lowercased().utf8.makeIterator()
         while let hi = iterator.next(), let lo = iterator.next() {
-            guard let h = UInt8(String(UnicodeScalar(h)), radix: 16),
-                  let l = UInt8(String(UnicodeScalar(lo)), radix: 16) else { return nil }
-            bytes.append(h << 4 | l)
+            guard let high = UInt8(String(UnicodeScalar(hi)), radix: 16),
+                  let low = UInt8(String(UnicodeScalar(lo)), radix: 16) else { return nil }
+            bytes.append(high << 4 | low)
         }
         return Data(bytes)
     }
