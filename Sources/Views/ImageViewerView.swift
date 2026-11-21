@@ -131,8 +131,7 @@ struct ImageViewerView: View {
     private var magnificationGesture: some Gesture {
         MagnificationGesture()
             .onChanged { value in
-                let candidate = lastScale * value
-                scale = CGFloat(candidate.clampedTo(1.0...10.0))
+                scale = (lastScale * value).clampedTo(1.0...10.0)
             }
             .onEnded { _ in
                 lastScale = scale
@@ -153,8 +152,8 @@ struct ImageViewerView: View {
     }
 
     private func clampOffset() {
-        let maxX = Double((scale - 1) * displayRect.width / 2)
-        let maxY = Double((scale - 1) * displayRect.height / 2)
+        let maxX = (scale - 1) * displayRect.width / 2
+        let maxY = (scale - 1) * displayRect.height / 2
         offset = CGSize(width: offset.width.clampedTo(-maxX...maxX),
                         height: offset.height.clampedTo(-maxY...maxY))
         lastOffset = offset

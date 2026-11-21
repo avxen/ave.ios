@@ -51,7 +51,7 @@ jobs:
             -scheme PrivateJudgesWorkspace \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
             -resultBundlePath build/TestResults.xcresult \
-            2>&1 | tee xcodebuild_test.log | xcbeautify --renderer github-actions || true
+            2>&1 | tee xcodebuild_test.log | xcbeautify --renderer github-actions
           echo "--- test totals ---"
           grep -E "Test Suite 'All tests'" -A 2 xcodebuild_test.log | tail -8 || true
 
@@ -65,7 +65,7 @@ jobs:
             -destination 'generic/platform=iOS' \
             -archivePath build/PrivateJudgesWorkspace.xcarchive \
             CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
-            2>&1 | tee xcodebuild_archive.log | xcbeautify || true
+            2>&1 | tee xcodebuild_archive.log | xcbeautify
           test -d "build/PrivateJudgesWorkspace.xcarchive/Products/Applications/Private Judges Workspace.app"
 
       - name: Package and verify unsigned IPA

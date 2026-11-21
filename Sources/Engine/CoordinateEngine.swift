@@ -245,8 +245,8 @@ public enum CoordinateEngine {
 
     /// Full consensus evaluation dict, mirroring evaluate_consensus() output
     /// exactly (key set, value types and rounding).
-    public static func evaluateConsensusDict(_ points: [PixelPoint], tolerancePx: Double,
-                                             method: String = "geometric_median")
+    static func evaluateConsensusDict(_ points: [PixelPoint], tolerancePx: Double,
+                                      method: String = "geometric_median")
         throws -> CanonicalValue {
         guard !points.isEmpty else { throw CoordinateError.noPoints }
         let point = try consensus(points, method: method)
@@ -285,7 +285,7 @@ public enum CoordinateEngine {
         public let agreementRatio: Double
         public let nJudges: Int
 
-        public var canonicalDict: CanonicalValue {
+        var canonicalDict: CanonicalValue {
             .object([
                 ("method", .string(method)),
                 ("x_px", .int(xPx)),

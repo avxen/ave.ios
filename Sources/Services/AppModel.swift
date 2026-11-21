@@ -55,6 +55,12 @@ extension Double {
     }
 }
 
+extension CGFloat {
+    func clampedTo(_ range: ClosedRange<CGFloat>) -> CGFloat {
+        Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
+    }
+}
+
 extension Int {
     func clamped(_ range: ClosedRange<Int>) -> Int {
         Swift.min(Swift.max(self, range.lowerBound), range.upperBound)

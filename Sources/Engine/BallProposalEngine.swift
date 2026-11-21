@@ -44,9 +44,9 @@ enum BallProposalEngine {
             guard 2 * r + 1 <= min(grid.w, grid.h) else { continue }
             for cy in r..<(grid.h - r) {
                 for cx in r..<(grid.w - r) {
-                    let centerMean = boxMean(integral, width: grid.w,
+                    let centerMean = boxMean(integral, width: grid.w, height: grid.h,
                                              x0: cx - r, y0: cy - r, x1: cx + r, y1: cy + r)
-                    let outer = boxMean(integral, width: grid.w,
+                    let outer = boxMean(integral, width: grid.w, height: grid.h,
                                         x0: cx - 2 * r, y0: cy - 2 * r,
                                         x1: cx + 2 * r, y1: cy + 2 * r)
                     let centerCount = (2 * r + 1) * (2 * r + 1)
@@ -56,7 +56,7 @@ enum BallProposalEngine {
                     // dark circular blob: centre notably darker than ring
                     let contrast = ringMean - centerMean
                     guard contrast > 0.02 else { continue }
-                    let localStd = boxStd(integral, integralSq, width: grid.w,
+                    let localStd = boxStd(integral, integralSq, width: grid.w, height: grid.h,
                                           x0: cx - 2 * r, y0: cy - 2 * r,
                                           x1: cx + 2 * r, y1: cy + 2 * r)
                     let score = contrast / (localStd + 0.02)
@@ -79,8 +79,8 @@ enum BallProposalEngine {
 
         // Map grid cells -> native pixels strictly through the coordinate engine.
         return selected.compactMap { cand in
-            let nx = Double(cand.x + 0.5) / Double(grid.w)
-            let ny = Double(cand.y + 0.5) / Double(grid.h)
+            let nx = (Double(cand.x) + 0.5) / Double(grid.w)
+            let ny = (Double(cand.y) + 0.5) / Double(grid.h)
             guard let p = try? CoordinateEngine.fromNormalized(
                 nx, ny, width: cgImage.width, height: cgImage.height) else { return nil }
             let confidence = min(0.99, max(0.05, cand.score / 6.0))
@@ -136,11 +136,12 @@ enum BallProposalEngine {
         return table
     }
 
-    static func boxSum(_ table: [Double], width: Int,
+    static func boxSum(_ table: [Double], width: Int, height: Int,
                        x0: Int, y0: Int, x1: Int, y1: Int) -> Double {
         let w = width + 1
         let x0c = max(0, x0), y0c = max(0, y0)
-        let x1c = min(width - 1, x1), y1c = min(height(table, w) - 2, y1)
+        let x1c = min(width - 1, x1), y1c = min(height - 1, y1)
+        guard x1c >= x0c, y1c >= y0c else { return 0 }
         let a = y0c * w + x0c
         let b = y0c * w + (x1c + 1)
         let c = (y1c + 1) * w + x0c
@@ -148,29 +149,27 @@ enum BallProposalEngine {
         return table[d] - table[b] - table[c] + table[a]
     }
 
-    private static func height(_ table: [Double], _ w: Int) -> Int {
-        table.count / w
-    }
-
-    static func boxMean(_ table: [Double], width: Int,
+    static func boxMean(_ table: [Double], width: Int, height: Int,
                         x0: Int, y0: Int, x1: Int, y1: Int) -> Double {
         let x0c = max(0, x0), y0c = max(0, y0)
-        let x1c = min(width - 1, x1)
+        let x1c = min(width - 1, x1), y1c = min(height - 1, y1)
         let h = max(0, y1c - y0c + 1), wid = max(0, x1c - x0c + 1)
         guard h > 0, wid > 0 else { return 0 }
-        return boxSum(table, width: width, x0: x0c, y0: y0c, x1: x1c, y1: y1c)
+        return boxSum(table, width: width, height: height, x0: x0c, y0: y0c, x1: x1c, y1: y1c)
             / Double(h * wid)
     }
 
-    static func boxStd(_ integral: [Double], _ integralSq: [Double], width: Int,
+    static func boxStd(_ integral: [Double], _ integralSq: [Double], width: Int, height: Int,
                        x0: Int, y0: Int, x1: Int, y1: Int) -> Double {
         let x0c = max(0, x0), y0c = max(0, y0)
-        let x1c = min(width - 1, x1)
+        let x1c = min(width - 1, x1), y1c = min(height - 1, y1)
         let h = max(0, y1c - y0c + 1), wid = max(0, x1c - x0c + 1)
         guard h > 0, wid > 0 else { return 0 }
         let n = Double(h * wid)
-        let mean = boxSum(integral, width: width, x0: x0c, y0: y0c, x1: x1c, y1: y1c) / n
-        let meanSq = boxSum(integralSq, width: width, x0: x0c, y0: y0c, x1: x1c, y1: y1c) / n
-        return sqrt(max(0, meanSq - mean * mean))
+        let mean = boxSum(integral, width: width, height: height,
+                          x0: x0c, y0: y0c, x1: x1c, y1: y1c) / n
+        let meanSq = boxSum(integralSq, width: width, height: height,
+                            x0: x0c, y0: y0c, x1: x1c, y1: y1c) / n
+        return (max(0, meanSq - mean * mean)).squareRoot()
     }
 }
