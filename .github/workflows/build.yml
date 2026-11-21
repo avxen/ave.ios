@@ -66,12 +66,12 @@ jobs:
             -archivePath build/PrivateJudgesWorkspace.xcarchive \
             CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
             2>&1 | tee xcodebuild_archive.log | xcbeautify
-          test -d "build/PrivateJudgesWorkspace.xcarchive/Products/Applications/Private Judges Workspace.app"
+          test -d "build/PrivateJudgesWorkspace.xcarchive/Products/Applications/PrivateJudgesWorkspace.app"
 
       - name: Package and verify unsigned IPA
         run: |
           set -euo pipefail
-          APP="build/PrivateJudgesWorkspace.xcarchive/Products/Applications/Private Judges Workspace.app"
+          APP="build/PrivateJudgesWorkspace.xcarchive/Products/Applications/PrivateJudgesWorkspace.app"
           plutil -lint "$APP/Info.plist"
           BID=$(plutil -extract CFBundleIdentifier raw "$APP/Info.plist")
           VER=$(plutil -extract CFBundleShortVersionString raw "$APP/Info.plist")

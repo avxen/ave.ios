@@ -23,7 +23,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.privatejudges.workspace
-        PRODUCT_NAME: "Private Judges Workspace"
+        PRODUCT_NAME: PrivateJudgesWorkspace
+        INFOPLIST_KEY_CFBundleDisplayName: "Judges Workspace"
         MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: YES
