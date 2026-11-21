@@ -92,14 +92,11 @@ extension String {
         guard count % 2 == 0, allSatisfy({ $0.isHexDigit }) else { return nil }
         var bytes = [UInt8]()
         bytes.reserveCapacity(count / 2)
-        var index = startIndex
-        while index < endIndex {
-            guard let hi = UInt8(String(self[index]), radix: 16),
-                  let lo = UInt8(String(self[self.index(after: index)]), radix: 16) else {
-                return nil
-            }
-            bytes.append(hi << 4 | lo)
-            index = self.index(after: index)
+        var iterator = self.lowercased().utf8.makeIterator()
+        while let hi = iterator.next(), let lo = iterator.next() {
+            guard let h = UInt8(String(UnicodeScalar(h)), radix: 16),
+                  let l = UInt8(String(UnicodeScalar(lo)), radix: 16) else { return nil }
+            bytes.append(h << 4 | l)
         }
         return Data(bytes)
     }
