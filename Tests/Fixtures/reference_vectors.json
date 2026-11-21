@@ -1,0 +1,1042 @@
+{
+ "meta": {
+  "engine_version": "1.0.0",
+  "generated_with": "scripts/gen_reference_vectors.py",
+  "note": "Python reference is authoritative; Swift tests compare byte-for-byte."
+ },
+ "canonical_vectors": [
+  {
+   "input": {
+    "a": 1,
+    "b": "two",
+    "c": [
+     1,
+     2,
+     3
+    ],
+    "d": {
+     "x": true,
+     "y": null
+    }
+   },
+   "canonical": "{\"a\":1,\"b\":\"two\",\"c\":[1,2,3],\"d\":{\"x\":true,\"y\":null}}",
+   "hash": "fdc14947a2d305b51d0b946ca0761bdb905b55f089631925166292431c269f5d"
+  },
+  {
+   "input": {
+    "z": 12.0,
+    "y": 8.485,
+    "x": 512.000004,
+    "w": 0.1
+   },
+   "canonical": "{\"w\":0.1,\"x\":512.000004,\"y\":8.485,\"z\":12.0}",
+   "hash": "44117eb205e9e4eea7d0ccdb8ccecd56b9278c45511214dcc2f50b729eef6de8"
+  },
+  {
+   "input": {
+    "s": "quote\" backslash\\ newline\n tab\t unicode: كرة القدم ⚽"
+   },
+   "canonical": "{\"s\":\"quote\\\" backslash\\\\ newline\\n tab\\t unicode: كرة القدم ⚽\"}",
+   "hash": "2e3df813bcc27e450fd7efe75afd6c5349f98ee390b13edb8a14407586ff1e18"
+  },
+  {
+   "input": {
+    "ctrl": "\u0001\u001f",
+    "slash": "a/b",
+    "empty": "",
+    "neg": -7
+   },
+   "canonical": "{\"ctrl\":\"\\u0001\\u001f\",\"empty\":\"\",\"neg\":-7,\"slash\":\"a/b\"}",
+   "hash": "9f797eb5ea2f89e72af0d3f839726699e5cad41a5c289aa72f945b117bf9555a"
+  },
+  {
+   "input": {
+    "nested": {
+     "deep": {
+      "deeper": [
+       1.5,
+       [
+        2,
+        "three"
+       ]
+      ]
+     }
+    },
+    "f": false
+   },
+   "canonical": "{\"f\":false,\"nested\":{\"deep\":{\"deeper\":[1.5,[2,\"three\"]]}}}",
+   "hash": "bf2e26979c819c5c9550fec40772f1a554028812aef7582311632239c97b6943"
+  },
+  {
+   "input": [
+    1,
+    "two",
+    3.5,
+    null,
+    true
+   ],
+   "canonical": "[1,\"two\",3.5,null,true]",
+   "hash": "8132e60ef4d1279f2dfe40e6b50b62702c2a11a16a90a468d4e4dae958b35c1e"
+  },
+  {
+   "input": {},
+   "canonical": "{}",
+   "hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+   "input": [],
+   "canonical": "[]",
+   "hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  }
+ ],
+ "rounding_vectors": [
+  {
+   "v": 2.5,
+   "rounded": 2
+  },
+  {
+   "v": 3.5,
+   "rounded": 4
+  },
+  {
+   "v": -2.5,
+   "rounded": -2
+  },
+  {
+   "v": -3.5,
+   "rounded": -4
+  },
+  {
+   "v": 0.5,
+   "rounded": 0
+  },
+  {
+   "v": -0.5,
+   "rounded": 0
+  },
+  {
+   "v": 1.4999999,
+   "rounded": 1
+  },
+  {
+   "v": -1.4999999,
+   "rounded": -1
+  },
+  {
+   "v": 4.5,
+   "rounded": 4
+  },
+  {
+   "v": -4.5,
+   "rounded": -4
+  },
+  {
+   "v": 12.5,
+   "rounded": 12
+  },
+  {
+   "v": -12.5,
+   "rounded": -12
+  },
+  {
+   "v": 0.49,
+   "rounded": 0
+  },
+  {
+   "v": -0.51,
+   "rounded": -1
+  },
+  {
+   "v": 6.5,
+   "rounded": 6
+  },
+  {
+   "v": -6.5,
+   "rounded": -6
+  },
+  {
+   "v": 7.5,
+   "rounded": 8
+  }
+ ],
+ "roundtrip_vectors": [
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 0,
+   "y": 0,
+   "nx": 0.0,
+   "ny": 0.0,
+   "rx": 0,
+   "ry": 0,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 4031,
+   "y": 3023,
+   "nx": 0.9997519841269841,
+   "ny": 0.9996693121693122,
+   "rx": 4031,
+   "ry": 3023,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 2016,
+   "y": 1512,
+   "nx": 0.5,
+   "ny": 0.5,
+   "rx": 2016,
+   "ry": 1512,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 1,
+   "y": 1,
+   "nx": 0.000248015873015873,
+   "ny": 0.00033068783068783067,
+   "rx": 1,
+   "ry": 1,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 17,
+   "y": 901,
+   "nx": 0.004216269841269841,
+   "ny": 0.29794973544973546,
+   "rx": 17,
+   "ry": 901,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 4030,
+   "y": 5,
+   "nx": 0.9995039682539683,
+   "ny": 0.0016534391534391533,
+   "rx": 4030,
+   "ry": 5,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 4032,
+   "h": 3024,
+   "x": 1209,
+   "y": 2328,
+   "nx": 0.29985119047619047,
+   "ny": 0.7698412698412699,
+   "rx": 1209,
+   "ry": 2328,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 0,
+   "y": 0,
+   "nx": 0.0,
+   "ny": 0.0,
+   "rx": 0,
+   "ry": 0,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 3023,
+   "y": 4031,
+   "nx": 0.9996693121693122,
+   "ny": 0.9997519841269841,
+   "rx": 3023,
+   "ry": 4031,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 1512,
+   "y": 2016,
+   "nx": 0.5,
+   "ny": 0.5,
+   "rx": 1512,
+   "ry": 2016,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 1,
+   "y": 1,
+   "nx": 0.00033068783068783067,
+   "ny": 0.000248015873015873,
+   "rx": 1,
+   "ry": 1,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 17,
+   "y": 901,
+   "nx": 0.005621693121693121,
+   "ny": 0.2234623015873016,
+   "rx": 17,
+   "ry": 901,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 3022,
+   "y": 5,
+   "nx": 0.9993386243386243,
+   "ny": 0.001240079365079365,
+   "rx": 3022,
+   "ry": 5,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 3024,
+   "h": 4032,
+   "x": 907,
+   "y": 3104,
+   "nx": 0.29993386243386244,
+   "ny": 0.7698412698412699,
+   "rx": 907,
+   "ry": 3104,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 0,
+   "y": 0,
+   "nx": 0.0,
+   "ny": 0.0,
+   "rx": 0,
+   "ry": 0,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 1919,
+   "y": 1079,
+   "nx": 0.9994791666666667,
+   "ny": 0.9990740740740741,
+   "rx": 1919,
+   "ry": 1079,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 960,
+   "y": 540,
+   "nx": 0.5,
+   "ny": 0.5,
+   "rx": 960,
+   "ry": 540,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 1,
+   "y": 1,
+   "nx": 0.0005208333333333333,
+   "ny": 0.000925925925925926,
+   "rx": 1,
+   "ry": 1,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 17,
+   "y": 901,
+   "nx": 0.008854166666666666,
+   "ny": 0.8342592592592593,
+   "rx": 17,
+   "ry": 901,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 1918,
+   "y": 5,
+   "nx": 0.9989583333333333,
+   "ny": 0.004629629629629629,
+   "rx": 1918,
+   "ry": 5,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1920,
+   "h": 1080,
+   "x": 576,
+   "y": 831,
+   "nx": 0.3,
+   "ny": 0.7694444444444445,
+   "rx": 576,
+   "ry": 831,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 0,
+   "y": 0,
+   "nx": 0.0,
+   "ny": 0.0,
+   "rx": 0,
+   "ry": 0,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 999,
+   "y": 999,
+   "nx": 0.999,
+   "ny": 0.999,
+   "rx": 999,
+   "ry": 999,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 500,
+   "y": 500,
+   "nx": 0.5,
+   "ny": 0.5,
+   "rx": 500,
+   "ry": 500,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 1,
+   "y": 1,
+   "nx": 0.001,
+   "ny": 0.001,
+   "rx": 1,
+   "ry": 1,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 17,
+   "y": 901,
+   "nx": 0.017,
+   "ny": 0.901,
+   "rx": 17,
+   "ry": 901,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 998,
+   "y": 5,
+   "nx": 0.998,
+   "ny": 0.005,
+   "rx": 998,
+   "ry": 5,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  },
+  {
+   "w": 1000,
+   "h": 1000,
+   "x": 300,
+   "y": 770,
+   "nx": 0.3,
+   "ny": 0.77,
+   "rx": 300,
+   "ry": 770,
+   "err_x": 0,
+   "err_y": 0,
+   "assert_err_le_1": true
+  }
+ ],
+ "distance_vectors": [
+  {
+   "ax": 0,
+   "ay": 0,
+   "bx": 3,
+   "by": 4,
+   "distance": 5.0
+  },
+  {
+   "ax": 100,
+   "ay": 100,
+   "bx": 103,
+   "by": 104,
+   "distance": 5.0
+  },
+  {
+   "ax": 0,
+   "ay": 0,
+   "bx": 5,
+   "by": 0,
+   "distance": 5.0
+  }
+ ],
+ "normalized_distance_vectors": [
+  {
+   "w": 1920,
+   "h": 1080,
+   "ax": 0,
+   "ay": 0,
+   "bx": 3,
+   "by": 4,
+   "nd": 0.002269727961261847
+  }
+ ],
+ "consensus_vectors": [
+  {
+   "name": "square_symmetric",
+   "points": [
+    [
+     500,
+     340
+    ],
+    [
+     524,
+     340
+    ],
+    [
+     524,
+     364
+    ],
+    [
+     500,
+     364
+    ]
+   ],
+   "tolerance_px": 12.0,
+   "method": "geometric_median",
+   "consensus": {
+    "method": "geometric_median",
+    "x_px": 512,
+    "y_px": 352,
+    "raw_x": 512.0,
+    "raw_y": 352.0,
+    "engine_version": "1.0.0",
+    "tolerance_px": 12.0,
+    "max_spread_px": 33.941,
+    "agreement_ratio": 0.0,
+    "n_judges": 4
+   },
+   "canonical": "{\"agreement_ratio\":0.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":33.941,\"method\":\"geometric_median\",\"n_judges\":4,\"raw_x\":512.0,\"raw_y\":352.0,\"tolerance_px\":12.0,\"x_px\":512,\"y_px\":352}",
+   "hash": "906bad68acd113d50a5e5e0856e35b970cb832dab8a6c824aa514f8d2eed198b"
+  },
+  {
+   "name": "triangle_345",
+   "points": [
+    [
+     100,
+     100
+    ],
+    [
+     103,
+     104
+    ],
+    [
+     106,
+     108
+    ]
+   ],
+   "tolerance_px": 12.0,
+   "method": "geometric_median",
+   "consensus": {
+    "method": "geometric_median",
+    "x_px": 103,
+    "y_px": 104,
+    "raw_x": 103.0,
+    "raw_y": 104.0,
+    "engine_version": "1.0.0",
+    "tolerance_px": 12.0,
+    "max_spread_px": 10.0,
+    "agreement_ratio": 1.0,
+    "n_judges": 3
+   },
+   "canonical": "{\"agreement_ratio\":1.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":10.0,\"method\":\"geometric_median\",\"n_judges\":3,\"raw_x\":103.0,\"raw_y\":104.0,\"tolerance_px\":12.0,\"x_px\":103,\"y_px\":104}",
+   "hash": "cb4ff78e477d6e17ce5dc45c11b7e486518625c86690bcf1b5f09cb6bb9b4668"
+  },
+  {
+   "name": "outlier_robust",
+   "points": [
+    [
+     500,
+     340
+    ],
+    [
+     512,
+     352
+    ],
+    [
+     524,
+     364
+    ],
+    [
+     2000,
+     800
+    ]
+   ],
+   "tolerance_px": 12.0,
+   "method": "geometric_median",
+   "consensus": {
+    "method": "geometric_median",
+    "x_px": 512,
+    "y_px": 352,
+    "raw_x": 512.490185,
+    "raw_y": 352.160941,
+    "engine_version": "1.0.0",
+    "tolerance_px": 12.0,
+    "max_spread_px": 1568.949,
+    "agreement_ratio": 0.25,
+    "n_judges": 4
+   },
+   "canonical": "{\"agreement_ratio\":0.25,\"engine_version\":\"1.0.0\",\"max_spread_px\":1568.949,\"method\":\"geometric_median\",\"n_judges\":4,\"raw_x\":512.490185,\"raw_y\":352.160941,\"tolerance_px\":12.0,\"x_px\":512,\"y_px\":352}",
+   "hash": "d3abebf7de3dd64dcb61ff093d904e576d22a9f184f2df8de035bc47e675c94d"
+  },
+  {
+   "name": "even_median",
+   "points": [
+    [
+     100,
+     200
+    ],
+    [
+     104,
+     200
+    ],
+    [
+     100,
+     204
+    ],
+    [
+     104,
+     204
+    ]
+   ],
+   "tolerance_px": 15.5,
+   "method": "per_axis_median",
+   "consensus": {
+    "method": "per_axis_median",
+    "x_px": 102,
+    "y_px": 202,
+    "raw_x": 102.0,
+    "raw_y": 202.0,
+    "engine_version": "1.0.0",
+    "tolerance_px": 15.5,
+    "max_spread_px": 5.657,
+    "agreement_ratio": 1.0,
+    "n_judges": 4
+   },
+   "canonical": "{\"agreement_ratio\":1.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":5.657,\"method\":\"per_axis_median\",\"n_judges\":4,\"raw_x\":102.0,\"raw_y\":202.0,\"tolerance_px\":15.5,\"x_px\":102,\"y_px\":202}",
+   "hash": "611acd2ec42d374f9dfaf763f934ad9081d91853feb2e78b9f43ec77bb392f8e"
+  },
+  {
+   "name": "single_point",
+   "points": [
+    [
+     640,
+     480
+    ]
+   ],
+   "tolerance_px": 0.0,
+   "method": "geometric_median",
+   "consensus": {
+    "method": "geometric_median",
+    "x_px": 640,
+    "y_px": 480,
+    "raw_x": 640.0,
+    "raw_y": 480.0,
+    "engine_version": "1.0.0",
+    "tolerance_px": 0.0,
+    "max_spread_px": 0.0,
+    "agreement_ratio": 1.0,
+    "n_judges": 1
+   },
+   "canonical": "{\"agreement_ratio\":1.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":0.0,\"method\":\"geometric_median\",\"n_judges\":1,\"raw_x\":640.0,\"raw_y\":480.0,\"tolerance_px\":0.0,\"x_px\":640,\"y_px\":480}",
+   "hash": "795c2679016d744183575269ee44c5fe6e854cfd1f255666b76d375b4010fb08"
+  }
+ ],
+ "record_vectors": [
+  {
+   "payload": {
+    "competition_id": "PJV-2026-R1",
+    "judge_id": "JUDGE-01",
+    "image_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "image_width_px": 1920,
+    "image_height_px": 1080,
+    "x_px": 1234,
+    "y_px": 567,
+    "note": "near centre circle",
+    "created_at": "2026-11-21T10:00:00Z",
+    "engine_version": "1.0.0",
+    "record_id": "7a37c2283b25c7671aedd6e0d516c4828bddaf795abd940f97a756e1290216ca"
+   },
+   "record_id": "63334e2c35433f86faacef89ab7d8bcbf6fe31e45252b03528c423f87e209512"
+  },
+  {
+   "payload": {
+    "competition_id": "PJV-2026-R1",
+    "judge_id": "JUDGE-02",
+    "image_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "image_width_px": 1920,
+    "image_height_px": 1080,
+    "x_px": 1241,
+    "y_px": 570,
+    "note": "",
+    "created_at": "2026-11-21T10:00:00Z",
+    "engine_version": "1.0.0",
+    "record_id": "cfdc75819d21f16fc7f7e746b89a3ec613ac9bc7ebfd31ea68480d039113b761"
+   },
+   "record_id": "fb75d8e61a5bb23755e6043836725d609d097decc81c7e9d4fe5409ed7e24992"
+  }
+ ],
+ "assessment_vectors": [
+  {
+   "name": "A-VECT-001",
+   "assessment": {
+    "assessment_id": "A-VECT-001",
+    "competition_id": "PJV-2026-R1",
+    "image_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "consensus_method": "geometric_median",
+    "tolerance_px": 12.0,
+    "judges": [
+     {
+      "judge_id": "JUDGE-01",
+      "crosshair": {
+       "x_px": 950,
+       "y_px": 512,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": "left of centre"
+     },
+     {
+      "judge_id": "JUDGE-02",
+      "crosshair": {
+       "x_px": 962,
+       "y_px": 520,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": ""
+     },
+     {
+      "judge_id": "JUDGE-03",
+      "crosshair": {
+       "x_px": 954,
+       "y_px": 516,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": "goal line"
+     }
+    ],
+    "consensus": {
+     "method": "geometric_median",
+     "x_px": 954,
+     "y_px": 516,
+     "raw_x": 954.0,
+     "raw_y": 516.0,
+     "engine_version": "1.0.0",
+     "tolerance_px": 12.0,
+     "max_spread_px": 14.422,
+     "agreement_ratio": 1.0,
+     "n_judges": 3
+    },
+    "approval": {
+     "status": "PENDING",
+     "approver": null,
+     "decided_at": null
+    },
+    "ai_proposals": [
+     {
+      "x_px": 957,
+      "y_px": 516,
+      "model": "heuristic-blob-v1",
+      "confidence": 0.83,
+      "proposal_id": "88ae9c8ccc5fe48b4d01a9bc8b6c640ac7cee1bafd5ed34a3583848f04582c13"
+     }
+    ],
+    "audit": [
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "system",
+      "action": "assessment_created",
+      "details": {
+       "assessment_id": "A-VECT-001",
+       "competition_id": "PJV-2026-R1",
+       "image_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "prev_entry_hash": "GENESIS",
+      "entry_hash": "7e6611d4cfd4e0a9f6300ddc1fb081da7c31ca99a390efc7c9487db2dd667935"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-01",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-01"
+      },
+      "prev_entry_hash": "7e6611d4cfd4e0a9f6300ddc1fb081da7c31ca99a390efc7c9487db2dd667935",
+      "entry_hash": "a1f671f2e29493d5a832961d33469720d89d75f908f035f47d5f1b04d2d9419b"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-02",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-02"
+      },
+      "prev_entry_hash": "a1f671f2e29493d5a832961d33469720d89d75f908f035f47d5f1b04d2d9419b",
+      "entry_hash": "0a13f1a9482a0d252c14c8f0e7fd6c869784507291373d038a86e1b55e8716fe"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-03",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-03"
+      },
+      "prev_entry_hash": "0a13f1a9482a0d252c14c8f0e7fd6c869784507291373d038a86e1b55e8716fe",
+      "entry_hash": "a5ab9037a73b5fd33523ac6081076bb37bb2ffcb56cd43ee0254d153ba361b31"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "system",
+      "action": "ai_proposal_registered",
+      "details": {
+       "proposal_id": "88ae9c8ccc5fe48b4d01a9bc8b6c640ac7cee1bafd5ed34a3583848f04582c13"
+      },
+      "prev_entry_hash": "a5ab9037a73b5fd33523ac6081076bb37bb2ffcb56cd43ee0254d153ba361b31",
+      "entry_hash": "101ec1e19f85d5202dc7f6b2c218388357d606e058ad88ef7d7094b8b00a4e38"
+     }
+    ],
+    "engine_version": "1.0.0",
+    "assessment_hash": "476e2bd4ccb687ff17a2f3767de90d392c141bf55238e2ac81554f89c2c0fd18"
+   },
+   "assessment_hash": "476e2bd4ccb687ff17a2f3767de90d392c141bf55238e2ac81554f89c2c0fd18",
+   "audit_chain_valid": true,
+   "canonical_without_hash": "{\"ai_proposals\":[{\"confidence\":0.83,\"model\":\"heuristic-blob-v1\",\"proposal_id\":\"88ae9c8ccc5fe48b4d01a9bc8b6c640ac7cee1bafd5ed34a3583848f04582c13\",\"x_px\":957,\"y_px\":516}],\"approval\":{\"approver\":null,\"decided_at\":null,\"status\":\"PENDING\"},\"assessment_id\":\"A-VECT-001\",\"audit\":[{\"action\":\"assessment_created\",\"actor\":\"system\",\"details\":{\"assessment_id\":\"A-VECT-001\",\"competition_id\":\"PJV-2026-R1\",\"image_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"entry_hash\":\"7e6611d4cfd4e0a9f6300ddc1fb081da7c31ca99a390efc7c9487db2dd667935\",\"prev_entry_hash\":\"GENESIS\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-01\",\"details\":{\"judge_id\":\"JUDGE-01\"},\"entry_hash\":\"a1f671f2e29493d5a832961d33469720d89d75f908f035f47d5f1b04d2d9419b\",\"prev_entry_hash\":\"7e6611d4cfd4e0a9f6300ddc1fb081da7c31ca99a390efc7c9487db2dd667935\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-02\",\"details\":{\"judge_id\":\"JUDGE-02\"},\"entry_hash\":\"0a13f1a9482a0d252c14c8f0e7fd6c869784507291373d038a86e1b55e8716fe\",\"prev_entry_hash\":\"a1f671f2e29493d5a832961d33469720d89d75f908f035f47d5f1b04d2d9419b\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-03\",\"details\":{\"judge_id\":\"JUDGE-03\"},\"entry_hash\":\"a5ab9037a73b5fd33523ac6081076bb37bb2ffcb56cd43ee0254d153ba361b31\",\"prev_entry_hash\":\"0a13f1a9482a0d252c14c8f0e7fd6c869784507291373d038a86e1b55e8716fe\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"ai_proposal_registered\",\"actor\":\"system\",\"details\":{\"proposal_id\":\"88ae9c8ccc5fe48b4d01a9bc8b6c640ac7cee1bafd5ed34a3583848f04582c13\"},\"entry_hash\":\"101ec1e19f85d5202dc7f6b2c218388357d606e058ad88ef7d7094b8b00a4e38\",\"prev_entry_hash\":\"a5ab9037a73b5fd33523ac6081076bb37bb2ffcb56cd43ee0254d153ba361b31\",\"timestamp\":\"2026-11-21T10:00:00Z\"}],\"competition_id\":\"PJV-2026-R1\",\"consensus\":{\"agreement_ratio\":1.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":14.422,\"method\":\"geometric_median\",\"n_judges\":3,\"raw_x\":954.0,\"raw_y\":516.0,\"tolerance_px\":12.0,\"x_px\":954,\"y_px\":516},\"consensus_method\":\"geometric_median\",\"engine_version\":\"1.0.0\",\"image_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"judges\":[{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":950,\"y_px\":512},\"judge_id\":\"JUDGE-01\",\"note\":\"left of centre\",\"submitted_at\":\"2026-11-21T10:00:00Z\"},{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":962,\"y_px\":520},\"judge_id\":\"JUDGE-02\",\"note\":\"\",\"submitted_at\":\"2026-11-21T10:00:00Z\"},{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":954,\"y_px\":516},\"judge_id\":\"JUDGE-03\",\"note\":\"goal line\",\"submitted_at\":\"2026-11-21T10:00:00Z\"}],\"tolerance_px\":12.0}"
+  },
+  {
+   "name": "A-VECT-002",
+   "assessment": {
+    "assessment_id": "A-VECT-002",
+    "competition_id": "PJV-2026-R1",
+    "image_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "consensus_method": "geometric_median",
+    "tolerance_px": 20.0,
+    "judges": [
+     {
+      "judge_id": "JUDGE-01",
+      "crosshair": {
+       "x_px": 500,
+       "y_px": 340,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": ""
+     },
+     {
+      "judge_id": "JUDGE-02",
+      "crosshair": {
+       "x_px": 524,
+       "y_px": 340,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": ""
+     },
+     {
+      "judge_id": "JUDGE-03",
+      "crosshair": {
+       "x_px": 524,
+       "y_px": 364,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": ""
+     },
+     {
+      "judge_id": "JUDGE-04",
+      "crosshair": {
+       "x_px": 500,
+       "y_px": 364,
+       "image_width_px": 1920,
+       "image_height_px": 1080
+      },
+      "submitted_at": "2026-11-21T10:00:00Z",
+      "note": "symmetric set"
+     }
+    ],
+    "consensus": {
+     "method": "geometric_median",
+     "x_px": 512,
+     "y_px": 352,
+     "raw_x": 512.0,
+     "raw_y": 352.0,
+     "engine_version": "1.0.0",
+     "tolerance_px": 20.0,
+     "max_spread_px": 33.941,
+     "agreement_ratio": 1.0,
+     "n_judges": 4
+    },
+    "approval": {
+     "status": "APPROVED",
+     "approver": "project-owner",
+     "decided_at": "2026-11-21T10:00:00Z"
+    },
+    "ai_proposals": [],
+    "audit": [
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "system",
+      "action": "assessment_created",
+      "details": {
+       "assessment_id": "A-VECT-002",
+       "competition_id": "PJV-2026-R1",
+       "image_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "prev_entry_hash": "GENESIS",
+      "entry_hash": "d16a8af0879eebaa11d83f0da5d194fb34346d1f340243b41d1c58b5994d4ebb"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-01",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-01"
+      },
+      "prev_entry_hash": "d16a8af0879eebaa11d83f0da5d194fb34346d1f340243b41d1c58b5994d4ebb",
+      "entry_hash": "dd0b53c4ac990fbd1660794cba1fa7871ff577f006a11cb1c8cde508490b7a2a"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-02",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-02"
+      },
+      "prev_entry_hash": "dd0b53c4ac990fbd1660794cba1fa7871ff577f006a11cb1c8cde508490b7a2a",
+      "entry_hash": "97cacbb5ce57de2cd1645f0387ff8ab1fe1cb199c6e8960b8f89db554a1280f6"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-03",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-03"
+      },
+      "prev_entry_hash": "97cacbb5ce57de2cd1645f0387ff8ab1fe1cb199c6e8960b8f89db554a1280f6",
+      "entry_hash": "1819f3b8374053972f7f78aedb7370f0febb5e0b12e1b081d5c9a9496e47dd46"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "JUDGE-04",
+      "action": "judge_submission_added",
+      "details": {
+       "judge_id": "JUDGE-04"
+      },
+      "prev_entry_hash": "1819f3b8374053972f7f78aedb7370f0febb5e0b12e1b081d5c9a9496e47dd46",
+      "entry_hash": "f468167f6a17fe4234564a779f83e64e8b72f050ecd19feb9bd67c9b5cebbad2"
+     },
+     {
+      "timestamp": "2026-11-21T10:00:00Z",
+      "actor": "project-owner",
+      "action": "approval_approved",
+      "details": {
+       "approver": "project-owner"
+      },
+      "prev_entry_hash": "f468167f6a17fe4234564a779f83e64e8b72f050ecd19feb9bd67c9b5cebbad2",
+      "entry_hash": "8ccc66042d2fcba52826c9ac72e55853770689056157b74dd45725049d840846"
+     }
+    ],
+    "engine_version": "1.0.0",
+    "assessment_hash": "6251b76ea1037d747c35391af56f02fa845e6a045610703bb559a99ffc3354cb"
+   },
+   "assessment_hash": "6251b76ea1037d747c35391af56f02fa845e6a045610703bb559a99ffc3354cb",
+   "audit_chain_valid": true,
+   "canonical_without_hash": "{\"ai_proposals\":[],\"approval\":{\"approver\":\"project-owner\",\"decided_at\":\"2026-11-21T10:00:00Z\",\"status\":\"APPROVED\"},\"assessment_id\":\"A-VECT-002\",\"audit\":[{\"action\":\"assessment_created\",\"actor\":\"system\",\"details\":{\"assessment_id\":\"A-VECT-002\",\"competition_id\":\"PJV-2026-R1\",\"image_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"entry_hash\":\"d16a8af0879eebaa11d83f0da5d194fb34346d1f340243b41d1c58b5994d4ebb\",\"prev_entry_hash\":\"GENESIS\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-01\",\"details\":{\"judge_id\":\"JUDGE-01\"},\"entry_hash\":\"dd0b53c4ac990fbd1660794cba1fa7871ff577f006a11cb1c8cde508490b7a2a\",\"prev_entry_hash\":\"d16a8af0879eebaa11d83f0da5d194fb34346d1f340243b41d1c58b5994d4ebb\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-02\",\"details\":{\"judge_id\":\"JUDGE-02\"},\"entry_hash\":\"97cacbb5ce57de2cd1645f0387ff8ab1fe1cb199c6e8960b8f89db554a1280f6\",\"prev_entry_hash\":\"dd0b53c4ac990fbd1660794cba1fa7871ff577f006a11cb1c8cde508490b7a2a\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-03\",\"details\":{\"judge_id\":\"JUDGE-03\"},\"entry_hash\":\"1819f3b8374053972f7f78aedb7370f0febb5e0b12e1b081d5c9a9496e47dd46\",\"prev_entry_hash\":\"97cacbb5ce57de2cd1645f0387ff8ab1fe1cb199c6e8960b8f89db554a1280f6\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"judge_submission_added\",\"actor\":\"JUDGE-04\",\"details\":{\"judge_id\":\"JUDGE-04\"},\"entry_hash\":\"f468167f6a17fe4234564a779f83e64e8b72f050ecd19feb9bd67c9b5cebbad2\",\"prev_entry_hash\":\"1819f3b8374053972f7f78aedb7370f0febb5e0b12e1b081d5c9a9496e47dd46\",\"timestamp\":\"2026-11-21T10:00:00Z\"},{\"action\":\"approval_approved\",\"actor\":\"project-owner\",\"details\":{\"approver\":\"project-owner\"},\"entry_hash\":\"8ccc66042d2fcba52826c9ac72e55853770689056157b74dd45725049d840846\",\"prev_entry_hash\":\"f468167f6a17fe4234564a779f83e64e8b72f050ecd19feb9bd67c9b5cebbad2\",\"timestamp\":\"2026-11-21T10:00:00Z\"}],\"competition_id\":\"PJV-2026-R1\",\"consensus\":{\"agreement_ratio\":1.0,\"engine_version\":\"1.0.0\",\"max_spread_px\":33.941,\"method\":\"geometric_median\",\"n_judges\":4,\"raw_x\":512.0,\"raw_y\":352.0,\"tolerance_px\":20.0,\"x_px\":512,\"y_px\":352},\"consensus_method\":\"geometric_median\",\"engine_version\":\"1.0.0\",\"image_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"judges\":[{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":500,\"y_px\":340},\"judge_id\":\"JUDGE-01\",\"note\":\"\",\"submitted_at\":\"2026-11-21T10:00:00Z\"},{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":524,\"y_px\":340},\"judge_id\":\"JUDGE-02\",\"note\":\"\",\"submitted_at\":\"2026-11-21T10:00:00Z\"},{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":524,\"y_px\":364},\"judge_id\":\"JUDGE-03\",\"note\":\"\",\"submitted_at\":\"2026-11-21T10:00:00Z\"},{\"crosshair\":{\"image_height_px\":1080,\"image_width_px\":1920,\"x_px\":500,\"y_px\":364},\"judge_id\":\"JUDGE-04\",\"note\":\"symmetric set\",\"submitted_at\":\"2026-11-21T10:00:00Z\"}],\"tolerance_px\":20.0}"
+  }
+ ]
+}

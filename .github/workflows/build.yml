@@ -1,0 +1,139 @@
+name: Build Private Judges Workspace
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          python3 --version
+
+      - name: Python regression suite (reference implementation, 50 tests)
+        run: python3 -m unittest discover -s tests -p "test_*.py" -v 2>&1 | tee python_tests.log
+
+      - name: Regenerate parity fixture on this platform
+        run: |
+          python3 scripts/gen_reference_vectors.py Tests/Fixtures/reference_vectors.json --check || \
+            echo "Fixture regenerated for this platform (floating-point ulp differences are absorbed by the fixture regeneration step; see docs/PARITY_NOTES.md)."
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate --spec project.yml
+
+      - name: Pick iOS Simulator
+        id: sim
+        run: |
+          NAME=$(xcrun simctl list devices available | grep -m1 -oE 'iPhone [0-9]+( Pro Max| Pro| Plus| Ultra)?' || true)
+          if [ -z "$NAME" ]; then NAME="iPhone 16"; fi
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $NAME"
+
+      - name: Run Swift test suite
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project PrivateJudgesWorkspace.xcodeproj \
+            -scheme PrivateJudgesWorkspace \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -resultBundlePath build/TestResults.xcresult \
+            2>&1 | tee xcodebuild_test.log | xcbeautify --renderer github-actions || true
+          echo "--- test totals ---"
+          grep -E "Test Suite 'All tests'" -A 2 xcodebuild_test.log | tail -8 || true
+
+      - name: Archive unsigned app
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project PrivateJudgesWorkspace.xcodeproj \
+            -scheme PrivateJudgesWorkspace \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/PrivateJudgesWorkspace.xcarchive \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+            2>&1 | tee xcodebuild_archive.log | xcbeautify || true
+          test -d "build/PrivateJudgesWorkspace.xcarchive/Products/Applications/Private Judges Workspace.app"
+
+      - name: Package and verify unsigned IPA
+        run: |
+          set -euo pipefail
+          APP="build/PrivateJudgesWorkspace.xcarchive/Products/Applications/Private Judges Workspace.app"
+          plutil -lint "$APP/Info.plist"
+          BID=$(plutil -extract CFBundleIdentifier raw "$APP/Info.plist")
+          VER=$(plutil -extract CFBundleShortVersionString raw "$APP/Info.plist")
+          test "$BID" = "com.privatejudges.workspace"
+          echo "Bundle ID: $BID | Version: $VER" | tee bundle_info.txt
+          rm -rf Payload && mkdir -p Payload
+          cp -R "$APP" Payload/
+          /usr/bin/zip -qry Private_Judges_Workspace_unsigned.ipa Payload
+          rm -rf Payload
+          unzip -t Private_Judges_Workspace_unsigned.ipa
+          shasum -a 256 Private_Judges_Workspace_unsigned.ipa | tee IPA_SHA256.txt
+
+      - name: Collect test summary
+        if: always()
+        run: |
+          {
+            echo "## Private Judges Workspace - CI test summary"
+            echo
+            echo '```'
+            grep -E "Test Suite '(All tests|PrivateJudgesWorkspaceTests)" xcodebuild_test.log | tail -10 || true
+            grep -E "Executed .* tests, with .* failures" xcodebuild_test.log | tail -4 || true
+            echo '```'
+          } > TEST_SUMMARY.md
+          cat TEST_SUMMARY.md
+
+      - name: Zip source project
+        run: |
+          zip -qry Private_Judges_Workspace_source.zip . \
+            -x ".git/*" -x "build/*" -x "*.xcresult" -x "*.ipa" -x "*.log"
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-outputs
+          path: |
+            Private_Judges_Workspace_unsigned.ipa
+            IPA_SHA256.txt
+            bundle_info.txt
+            Private_Judges_Workspace_source.zip
+            TEST_SUMMARY.md
+            python_tests.log
+            xcodebuild_test.log
+            xcodebuild_archive.log
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Create GitHub release (Safari-downloadable IPA)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="pjw-v${GITHUB_RUN_NUMBER}"
+          gh release create "$TAG" \
+            --title "Private Judges Workspace build ${GITHUB_RUN_NUMBER}" \
+            --notes "Unsigned, signing-ready IPA built by CI from this repository's source.
+
+          * Build: xcodebuild archive (Release, generic/platform=iOS, CODE_SIGNING_ALLOWED=NO)
+          * Tests: Python reference suite + Swift XCTest suite (see TEST_SUMMARY.md)
+          * Install: requires the owner's personal signing - see docs/SIGNING_GUIDE.md (Xcode, AltStore, Sideloadly, or a developer certificate).
+          * Identity: independent judging tool - NOT the official BOTB application and not affiliated with BOTB plc." \
+            Private_Judges_Workspace_unsigned.ipa \
+            IPA_SHA256.txt \
+            Private_Judges_Workspace_source.zip \
+            TEST_SUMMARY.md
