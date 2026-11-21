@@ -96,7 +96,6 @@ final class CoordinateEngineTests: XCTestCase {
         let nd = try CoordinateEngine.normalizedDistance(
             CoordinateEngine.PixelPoint(x: 0, y: 0), CoordinateEngine.PixelPoint(x: 3, y: 4),
             width: 1920, height: 1080)
-        let vectors = try Fixtures.referenceVectors()
         let ndExpected = try XCTUnwrap(vectors["normalized_distance_vectors"]?.arrayValue?.first?
             .objectValue?["nd"]?.doubleValue)
         XCTAssertEqual(nd, try XCTUnwrap(ndExpected), accuracy: 1e-15)
