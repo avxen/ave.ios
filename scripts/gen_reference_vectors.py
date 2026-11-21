@@ -145,8 +145,13 @@ def main() -> int:
                            x_px=1241, y_px=570, note="", created_at=FIXED_NOW),
     ]
     for rec in recs:
-        d = rec.to_json_dict()
-        record_payloads.append({"payload": d, "record_id": cr.record_hash(d)})
+        d = rec.to_json_dict()  # includes record_id
+        record_payloads.append({
+            "payload": d,
+            # authoritative id = hash of the payload WITHOUT record_id
+            # (mirrors crosshair_records.save semantics)
+            "record_id": cr.record_hash({k: v for k, v in d.items() if k != "record_id"}),
+        })
     vectors["record_vectors"] = record_payloads
 
     # ---- assessment vectors (multi_judge) ---------------------------------------

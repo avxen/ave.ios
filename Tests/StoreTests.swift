@@ -46,8 +46,12 @@ final class RecordsStoreTests: XCTestCase {
             let dict = try XCTUnwrap(spec.objectValue)
             let payload = try XCTUnwrap(dict["payload"]?.objectValue)
             let expectedId = try XCTUnwrap(dict["record_id"]?.stringValue)
-            let canonicalValue = CanonicalValue.object(payload.map { ($0.key, $0.value.canonical) })
-            XCTAssertEqual(CanonicalJSON.hash(canonicalValue), expectedId)
+            // hash of the payload WITHOUT record_id (mirrors crosshair_records)
+            let withoutId = payload.filter { $0.key != "record_id" }
+                .map { ($0.key, $0.value.canonical) }
+            XCTAssertEqual(CanonicalJSON.hash(.object(withoutId)), expectedId)
+            XCTAssertEqual(payload["record_id"]?.stringValue, expectedId,
+                           "payload must embed the same record id")
         }
     }
 

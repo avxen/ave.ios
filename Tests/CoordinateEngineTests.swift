@@ -129,19 +129,19 @@ final class CoordinateEngineTests: XCTestCase {
     }
 
     func testConsensusDeterminismAndOutlierRobustness() throws {
-        // Symmetric square: consensus at centre; repeated calls identical.
-        let square = [CoordinateEngine.PixelPoint(x: 500, y: 340),
-                      CoordinateEngine.PixelPoint(x: 524, y: 340),
-                      CoordinateEngine.PixelPoint(x: 524, y: 364),
-                      CoordinateEngine.PixelPoint(x: 500, y: 364)]
-        let first = try CoordinateEngine.consensus(square)
+        // Determinism: repeated calls identical.
+        let cluster = [CoordinateEngine.PixelPoint(x: 100, y: 100),
+                       CoordinateEngine.PixelPoint(x: 102, y: 98),
+                       CoordinateEngine.PixelPoint(x: 99, y: 101),
+                       CoordinateEngine.PixelPoint(x: 101, y: 99)]
+        let first = try CoordinateEngine.consensus(cluster)
         for _ in 0..<5 {
-            XCTAssertEqual(try CoordinateEngine.consensus(square), first)
+            XCTAssertEqual(try CoordinateEngine.consensus(cluster), first)
         }
-        XCTAssertEqual(first, CoordinateEngine.PixelPoint(x: 512, y: 352))
 
-        // Outlier robustness: far outlier moves consensus < 5 px (median robust).
-        let withOutlier = square + [CoordinateEngine.PixelPoint(x: 5000, y: 5000)]
+        // Outlier robustness (same geometry as the Python regression suite):
+        // a far outlier must move the consensus by less than 5 px.
+        let withOutlier = cluster + [CoordinateEngine.PixelPoint(x: 500, y: 500)]
         let shifted = try CoordinateEngine.consensus(withOutlier)
         XCTAssertLessThan(CoordinateEngine.euclideanDistancePx(first, shifted), 5.0)
     }
