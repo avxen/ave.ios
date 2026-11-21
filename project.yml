@@ -10,6 +10,9 @@ settings:
     SWIFT_VERSION: "5.9"
     CODE_SIGNING_ALLOWED: "NO"
     ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
 
 targets:
   PrivateJudgesWorkspace:
@@ -42,8 +45,6 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.privatejudges.workspace.tests
         GENERATE_INFOPLIST_FILE: YES
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Private Judges Workspace.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)Private Judges Workspace"
-        BUNDLE_LOADER: "$(TEST_HOST)"
 
 schemes:
   PrivateJudgesWorkspace:
